@@ -74,7 +74,7 @@ plugins:
 author:
   name: "Margo Blaha"                         # CHANGE
   # avatar: "/assets/images/bio-photo.jpg"        # uncomment after uploading a photo to assets/images/
-  bio: "PhD student in vector ecology. I also write about people, culture and ideas."
+  bio: "PhD student in vector ecology. Writing about gender, culture, people & whatever intellectual rabbit hole I fell into this week."
   location: "Trento, Italy"
   links:
     - label: "Instagram"

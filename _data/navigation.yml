@@ -1,3 +1,9 @@
-<p>Unless otherwise noted, text © 2026 Margo Blaha, licensed under
-<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
-Views expressed here are my own.</p>
+main:
+  - title: "Home"
+    url: /
+  - title: "About"
+    url: /about/
+  - title: "Essays"
+    url: /essays/
+  - title: "Categories"
+    url: /categories/

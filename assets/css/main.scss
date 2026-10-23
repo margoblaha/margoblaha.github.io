@@ -7,9 +7,9 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 
 // ---- Palette: set after the skin, before the main import ----
-$background-color: #6B2D5C;          // plum
+$background-color: ##380C2E;          // deep plum
 $text-color: #FBF7F2;                // cream
-$muted-text-color: #E0CCDA;          // soft lilac-cream, ~6.4:1 on plum
+$muted-text-color: #6B2C5C;          // soft plum,
 $primary-color: #B5523B;             // terracotta: buttons
 $link-color: #F0B49E;                // light terracotta, ~5.4:1 on plum
 $link-color-hover: #FBF7F2;

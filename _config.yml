@@ -20,7 +20,7 @@ title: "Epistemic Margins"
 title_separator: "|"
 email: "marharyta.blaha@gmail.com"                                         # optional: public contact email, or leave empty
 description: >-
-  Essays, research notes and reflections on science, gender, creativity and culture, by a researcher who studies mosquitoes and thinks about everything else.
+  Vector ecology, gender politics, culture, people & whatever rabbit hole I fell into this week.
 url: "https://margoblaha.github.io"
 baseurl: ""                                       
 locale: "en-GB"
@@ -74,7 +74,7 @@ plugins:
 author:
   name: "Margo Blaha"                         # CHANGE
   # avatar: "/assets/images/bio-photo.jpg"        # uncomment after uploading a photo to assets/images/
-  bio: "PhD student in vector ecology and thermal biology. I also write about people, culture and ideas."
+  bio: "PhD student in vector ecology. I also write about people, culture and ideas."
   location: "Trento, Italy"
   links:
     - label: "Instagram"

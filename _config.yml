@@ -35,7 +35,7 @@ github_username: margoblaha
 og_image: /assets/images/og-default.jpg           # CHANGE: 1200x630 px default social-share image (upload to assets/images/)
 
 # Look and feel
-minimal_mistakes_skin: "air"                      # try "dirt" for warmer tones
+minimal_mistakes_skin: "dark"                      # try "dirt" for warmer tones
 search: true
 
 # ------------------------------------------------------------

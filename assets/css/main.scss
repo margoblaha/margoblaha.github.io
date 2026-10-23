@@ -78,7 +78,6 @@ body { line-height: 1.6; }
   max-width: 34em;
 }
 
-```scss
 // ---- Epistemic Margins masthead ----
 
 .masthead {
@@ -140,7 +139,7 @@ body { line-height: 1.6; }
 .masthead .greedy-nav .hidden-links a {
   color: #FBF7F2;
 }
-```
+
 .page__content a { text-decoration: underline; text-underline-offset: 0.18em; }
 .page__content h2 { border-bottom: 2px solid #B5523B; padding-bottom: 0.2em; }
 ::selection { background: #B5523B; color: #FBF7F2; }

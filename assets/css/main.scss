@@ -29,8 +29,19 @@ $navicon-link-color-hover: #F0B49E;
 @font-face {
   font-family: "Fraunces";
   src: url("/assets/fonts/fraunces-600.woff2") format("woff2");
-  font-weight: 600; font-style: normal; font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/fraunces-600-italic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "Literata";
   src: url("/assets/fonts/literata-400.woff2") format("woff2");
@@ -50,9 +61,13 @@ $navicon-link-color-hover: #F0B49E;
 body, button, input, textarea, .greedy-nav, .btn, .page__footer {
   font-family: "Literata", Georgia, "Times New Roman", serif;
 }
-h1, h2, h3, h4, h5, h6, .page__title, .site-title, .archive__item-title {
+h1, h2, h3, h4, h5, h6, .page__title, .archive__item-title {
   font-family: "Fraunces", Georgia, serif;
   font-weight: 600;
+}
+
+.site-title {
+  font-family: "Fraunces", Georgia, serif;
 }
 
 // ---- Layout: roomy, ~65 characters per line ----
@@ -62,6 +77,70 @@ body { line-height: 1.6; }
 .page__content p, .page__content ul, .page__content ol, .page__content blockquote {
   max-width: 34em;
 }
+
+```scss
+// ---- Epistemic Margins masthead ----
+
+.masthead {
+  background: #380C2E;
+  border-bottom: none;
+}
+
+.masthead__inner-wrap {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.masthead .site-logo {
+  display: inline-block;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0.75rem 1rem 0.75rem 0;
+  line-height: 1.05;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logo-line-one,
+.logo-line-two {
+  display: block;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.55rem;
+}
+
+.logo-line-one {
+  color: #FBF7F2;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.logo-line-two {
+  margin-left: 2.1rem;
+  color: #B58AAF;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.masthead .greedy-nav {
+  background: transparent;
+}
+
+.masthead .greedy-nav .visible-links a {
+  color: rgba(251, 247, 242, 0.82);
+}
+
+.masthead .greedy-nav .visible-links a:hover {
+  color: #FBF7F2;
+}
+
+.masthead .greedy-nav .hidden-links {
+  background: #380C2E;
+}
+
+.masthead .greedy-nav .hidden-links a {
+  color: #FBF7F2;
+}
+```
 .page__content a { text-decoration: underline; text-underline-offset: 0.18em; }
 .page__content h2 { border-bottom: 2px solid #B5523B; padding-bottom: 0.2em; }
 ::selection { background: #B5523B; color: #FBF7F2; }

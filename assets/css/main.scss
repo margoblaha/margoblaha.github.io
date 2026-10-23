@@ -1,0 +1,67 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+
+// ---- Palette: set after the skin, before the main import ----
+$background-color: #6B2D5C;          // plum
+$text-color: #FBF7F2;                // cream
+$muted-text-color: #E0CCDA;          // soft lilac-cream, ~6.4:1 on plum
+$primary-color: #B5523B;             // terracotta: buttons
+$link-color: #F0B49E;                // light terracotta, ~5.4:1 on plum
+$link-color-hover: #FBF7F2;
+$link-color-visited: #E3C3D6;
+$border-color: #8A4A78;
+$code-background-color: #2B2430;     // deep ink
+$code-background-color-dark: #2B2430;
+$form-background-color: #2B2430;
+$footer-background-color: #2B2430;
+$masthead-link-color: #FBF7F2;
+$masthead-link-color-hover: #F0B49E;
+$navicon-link-color-hover: #F0B49E;
+
+@import "minimal-mistakes"; // main partials
+
+// ---- Self-hosted fonts ----
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/fraunces-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("/assets/fonts/literata-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("/assets/fonts/literata-400-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("/assets/fonts/literata-700.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+body, button, input, textarea, .greedy-nav, .btn, .page__footer {
+  font-family: "Literata", Georgia, "Times New Roman", serif;
+}
+h1, h2, h3, h4, h5, h6, .page__title, .site-title, .archive__item-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+}
+
+// ---- Layout: roomy, ~65 characters per line ----
+body { line-height: 1.6; }
+.page__content { font-size: 1.1rem; }
+.page__content p, .page__content li { line-height: 1.6; }
+.page__content p, .page__content ul, .page__content ol, .page__content blockquote {
+  max-width: 34em;
+}
+.page__content a { text-decoration: underline; text-underline-offset: 0.18em; }
+.page__content h2 { border-bottom: 2px solid #B5523B; padding-bottom: 0.2em; }
+::selection { background: #B5523B; color: #FBF7F2; }

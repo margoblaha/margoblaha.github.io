@@ -17,10 +17,6 @@
         {% endif %}
       {% endfor %}
     {% endif %}
-
-    {% unless site.atom_feed.hide %}
-      <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> {{ site.data.ui-text[locale].feed_label | default: "RSS feed" }}</a></li>
-    {% endunless %}
   </ul>
 </div>
 {% endif %}

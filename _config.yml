@@ -13,99 +13,149 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: MM
-email:
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-twitter_username: username
-github_username: username
-minimal_mistakes_skin: default
+# ------------------------------------------------------------
+# Site settings
+# ------------------------------------------------------------
+title: "Margo Blaha"
+title_separator: "|"
+email: "marharyta.blaha@gmail.com"                                         # optional: public contact email, or leave empty
+description: >-
+  Essays, research notes and reflections on science, gender, creativity and culture, by a researcher who studies mosquitoes and thinks about everything else.
+url: "https://margoblaha.github.io"
+baseurl: ""                                       
+locale: "en-GB"
+timezone: Europe/Rome
+words_per_minute: 200
+breadcrumbs: false
+
+# Social identity
+github_username: margoblaha
+# twitter:
+#   username: "yourhandle"                        # uncomment only if you use X/Twitter (enables Twitter cards)
+og_image: /assets/images/og-default.jpg           # CHANGE: 1200x630 px default social-share image (upload to assets/images/)
+
+# Look and feel
+minimal_mistakes_skin: "air"                      # try "dirt" for warmer tones
 search: true
 
+# ------------------------------------------------------------
 # Build settings
+# ------------------------------------------------------------
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
-# Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
+paginate: 5
 paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 include:
   - _pages
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
 
-# Plugins (previously gems:)
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-gist
   - jekyll-feed
-  - jemoji
   - jekyll-include-cache
 
+# ------------------------------------------------------------
+# Author profile (sidebar) and social links
+# Delete any link you don't use, so there are no broken links.
+# ------------------------------------------------------------
 author:
-  name   : "First Lastname"
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  name: "Margo Blaha"                         # CHANGE
+  # avatar: "/assets/images/bio-photo.jpg"        # uncomment after uploading a photo to assets/images/
+  bio: "PhD student in vector ecology and thermal biology. I also write about people, culture and ideas."
+  location: "Trento, Italy"
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+    - label: "ORCID"
+      icon: "fab fa-fw fa-orcid"
+      url: "https://orcid.org/0009-0009-1236-4585"
+    # - label: "Google Scholar"
+    #  icon: "fas fa-fw fa-graduation-cap"
+    #  url: "https://scholar.google.com/citations?user=XXXX"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/marharyta-blaha"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/margoblaha"
+    - label: "ResearchGate"
+      icon: "fab fa-fw fa-researchgate"
+      url: "https://www.researchgate.net/profile/Margo-Blaha"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://www.instagram.com/epistemicmargins"
+    # - label: "Mastodon"
+    #   icon: "fab fa-fw fa-mastodon"
+    #   url: "https://mastodon.social/@XXXX"
+    # - label: "Bluesky"
+    #   icon: "fab fa-fw fa-bluesky"
+    #   url: "https://bsky.app/profile/XXXX"
 
+# Structured data for search engines (optional but useful)
+social:
+  type: Person
+  name: "Margo Blaha"                         # CHANGE
+  links:
+    - "https://orcid.org/0009-0009-1236-4585" 
+    - "https://www.linkedin.com/in/marharyta-blaha"
+    - "https://github.com/margoblaha"
+    - "https://www.researchgate.net/profile/Margo-Blaha"
+    - "https://www.instagram.com/epistemicmargins"
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+    - label: "RSS"
+      icon: "fas fa-fw fa-rss-square"
+      url: "/feed.xml"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/marharyta-blaha"
+    - label: "ORCID"
+      icon: "fab fa-fw fa-orcid"
+      url: "https://orcid.org/0009-0009-1236-4585" 
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/margoblaha"
+    - label: "ResearchGate"
+      icon: "fab fa-fw fa-researchgate"
+      url: "https://www.researchgate.net/profile/Margo-Blaha"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://www.instagram.com/epistemicmargins"
 
+# ------------------------------------------------------------
+# Defaults for posts and pages
+# ------------------------------------------------------------
 defaults:
-  # _posts
+  # Posts (everything in _posts/)
   - scope:
       path: ""
       type: posts
     values:
       layout: single
-      author_profile: true
+      author_profile: false     # keeps reading pages clean; set true for a sidebar bio
       read_time: true
-      comments: true
+      show_date: true
+      comments: false
       share: true
-      related: true
-  # _pages
+      related: false
+  # Pages (everything in _pages/)
   - scope:
       path: "_pages"
       type: pages
     values:
       layout: single
-      author_profile: true
+      author_profile: false
 
 category_archive:
   type: liquid

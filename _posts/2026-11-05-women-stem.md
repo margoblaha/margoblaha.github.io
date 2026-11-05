@@ -15,7 +15,7 @@ tags:
   - research policy
 header:
    overlay_image: /assets/images/women-in-stem.jpg
-   overlay_filter: 0.5
+   overlay_filter: 0.2
 ---
 Europe says it has a shortage. Under the Digital Decade programme, the EU has set a target of 20 million ICT specialists by 2030. Its own research agency now projects a shortfall of around five million. Women made up fewer than one in five ICT specialists already in post in 2024: just 19%. The agency presents closing this gap as an economic necessity, since without women the Union draws on less than three quarters of its potential talent pool.[^eurofound]
 
@@ -132,6 +132,8 @@ None of these changes will come from goodwill alone. Gains in European labour hi
 - Tronto, J. (2013). Caring Democracy. New York: NYU Press. 
 - Tulshyan, R. and Burey, J.-A. (2021). Stop telling women they have imposter syndrome. Harvard Business Review, 11 February. hbr.org
 - Van den Brink, M. and Benschop, Y. (2012). Gender practices in the construction of academic excellence: Sheep with five legs. Organization, 19(4), 507–524. doi:10.1177/1350508411414293
+## Citation notes
+
 [^eurofound]: Eurofound 2026.
 [^shefigures]: She Figures 2024.
 [^eurostat]: Eurostat 2024.
@@ -148,7 +150,6 @@ None of these changes will come from goodwill alone. Gains in European labour hi
 [^cgil]: CGIL estimates, in Il Post 2025.
 [^adi]: ADI survey, reported in Avvenire.
 [^morini]: Morini 2010.
-[^bourdieu]: Bourdieu 1984, 1998.
 [^vandenbrink]: Van den Brink and Benschop 2012.
 [^ross]: Ross et al. 2022.
 [^faulkner]: Faulkner 2000.

@@ -1,6 +1,6 @@
 ---
 title: "The ideal researcher has no family, no complaints, and no contract"
-excerpt: "OWhy the absence of women from STEM is a question about what we mean by work and value."
+excerpt: "Why the absence of women from STEM is a question about what we mean by work and value."
 date: 2026-11-05
 layout: single
 read_time: true

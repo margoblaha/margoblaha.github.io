@@ -46,7 +46,6 @@ layout: default
       {%- assign share_title = page.title | strip_html | url_encode -%}
       <p class="sheet__share"><span class="sheet__label">Pass it on</span>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" rel="nofollow noopener noreferrer">LinkedIn</a>
-        <a href="https://bsky.app/intent/compose?text={{ share_title }}%20{{ share_url }}" rel="nofollow noopener noreferrer">Bluesky</a>
         <a href="mailto:?subject={{ share_title }}&amp;body={{ share_url }}">Email</a>
         <button type="button" class="copy-link" data-url="{{ page.url | absolute_url }}">Copy link</button>
       </p>

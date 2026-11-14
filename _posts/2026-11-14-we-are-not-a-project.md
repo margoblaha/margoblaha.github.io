@@ -68,7 +68,7 @@ That is what a real apology is. *I'm sorry. You're right. I didn't see it. I'm s
 
 The reverse is true as well. Letting someone love you means handing them the power to hurt you, but all this vulnerability is not a design flaw in intimacy , but its condition. The only person who cannot be hurt is the one no one can reach.
 
-## Sorry about the mess
+## _Sorry about the mess_
 
 So perhaps the goal was never to be finished with our project. Maybe just to be more honest and more willing to stay human with other humans. 
 

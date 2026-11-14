@@ -4,6 +4,8 @@ main:
   - title: "About"
     url: /about/
   - title: "Essays"
-    url: /essays/
+    url: /essays/ 
+  - title: "Reflections"
+    url: /reflections/  
   - title: "Contact"
     url: /contact/

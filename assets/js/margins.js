@@ -6,7 +6,8 @@
  * 2. Sidenotes: footnotes are copied into the right-hand margin on
  *    wide screens. The footnote list at the end stays for everyone else.
  * 3. Nature: a landscape cross-section and margin drawings (About page).
- * 4. Copy link button on posts.
+ * 4. Contact page: links as small worlds joined by hyphae.
+ * 5. Copy link button on posts.
  */
 (function () {
   "use strict";
@@ -521,6 +522,227 @@
     add("path", { d: "M-20 " + gy + "H" + (w + 20), "class": "sc-ground" });
   }
 
+  /* ---------- contact page: small worlds joined by hyphae ----------
+   * Each link is a world. Hyphae grow out from the hub (email) along a
+   * spanning tree, then slow pulses travel along them like signals.
+   */
+  function seekPath(r, a, b, step) {
+    var pts = [[a[0], a[1]]], x = a[0], y = a[1];
+    var ang = Math.atan2(b[1] - y, b[0] - x) + (r() - 0.5) * 1.2;
+    for (var i = 0; i < 600; i++) {
+      var want = Math.atan2(b[1] - y, b[0] - x);
+      var diff = Math.atan2(Math.sin(want - ang), Math.cos(want - ang));
+      var d = Math.hypot(b[0] - x, b[1] - y);
+      var near = Math.min(1, 90 / d);                 // home in harder near the end
+      ang += diff * (0.14 + near * 0.6) + (r() - 0.5) * 0.5 * (1 - near * 0.8);
+      x += Math.cos(ang) * step; y += Math.sin(ang) * step;
+      pts.push([x, y]);
+      if (Math.hypot(b[0] - x, b[1] - y) < Math.max(step * 1.6, 16)) { pts.push([b[0], b[1]]); break; }
+    }
+    return pts;
+  }
+  function pathLen(pts) {
+    var L = 0;
+    for (var i = 1; i < pts.length; i++) L += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+    return L;
+  }
+
+  function connect(box, animate) {
+    var w = box.clientWidth, h = box.clientHeight;
+    if (!w || !h) return;
+    var old = box.querySelector(".connect__svg");
+    if (old) old.remove();
+    var small = w < 720;
+    var r = rng("worlds" + Math.round(w / 50));
+    var links = Array.prototype.slice.call(box.querySelectorAll(".world"));
+    if (!links.length) return;
+
+    // keep worlds clear of the page text
+    var origin = box.getBoundingClientRect();
+    var avoid = [];
+    Array.prototype.forEach.call(document.querySelectorAll(".sheet--connect .sheet__titles, .sheet--connect .sheet__body > *"), function (n) {
+      var b = n.getBoundingClientRect();
+      if (!b.width) return;
+      avoid.push([b.left - origin.left - 40, b.top - origin.top - 40, b.right - origin.left + 40, b.bottom - origin.top + 70]);
+    });
+    var pad = small ? 60 : 130;
+    var free = function (x, y) {
+      if (x < pad || x > w - pad || y < pad + 20 || y > h - pad) return false;
+      return avoid.every(function (a) { return x < a[0] - 60 || x > a[2] + 60 || y < a[1] - 50 || y > a[3] + 30; });
+    };
+    var cands = [];
+    for (var c = 0; c < 2500 && cands.length < 600; c++) {
+      var cx = r() * w, cy = r() * h;
+      if (free(cx, cy)) cands.push([cx, cy]);
+    }
+    if (cands.length < links.length) { box.classList.remove("connect--live"); return; }
+
+    // hub near the middle of the free area, then spread the rest out
+    var mx = 0, my = 0;
+    cands.forEach(function (p) { mx += p[0]; my += p[1]; });
+    mx /= cands.length; my /= cands.length;
+    var hubIndex = Math.max(0, links.findIndex(function (a) { return a.classList.contains("world--hub"); }));
+    var order = [hubIndex].concat(links.map(function (_, i) { return i; }).filter(function (i) { return i !== hubIndex; }));
+    var pos = new Array(links.length);
+    pos[hubIndex] = cands.reduce(function (best, p) {
+      return Math.hypot(p[0] - mx, p[1] - my) < Math.hypot(best[0] - mx, best[1] - my) ? p : best;
+    });
+    // spread out, but only up to a comfortable spacing; beyond that, stay close to the hub
+    var hubP = pos[hubIndex], spacing = small ? 140 : Math.min(330, w / 4.2);
+    var placed = [hubP];
+    order.slice(1).forEach(function (i) {
+      var best = null, bestS = -Infinity;
+      cands.forEach(function (p) {
+        var d = Infinity;
+        placed.forEach(function (q) { d = Math.min(d, Math.hypot(p[0] - q[0], (p[1] - q[1]) * 1.2)); });
+        var score = Math.min(d, spacing) * 3 - Math.hypot(p[0] - hubP[0], p[1] - hubP[1]) * 0.35;
+        if (score > bestS) { bestS = score; best = p; }
+      });
+      pos[i] = best; placed.push(best);
+    });
+
+    // spanning tree from the hub (Prim), plus a few short extra links
+    var n = links.length, inTree = [hubIndex], edges = [], depth = {}; depth[hubIndex] = 0;
+    var dist = function (i, j) { return Math.hypot(pos[i][0] - pos[j][0], pos[i][1] - pos[j][1]); };
+    while (inTree.length < n) {
+      var bi = -1, bj = -1, bd = Infinity;
+      inTree.forEach(function (i) {
+        for (var j = 0; j < n; j++) if (inTree.indexOf(j) < 0 && dist(i, j) < bd) { bd = dist(i, j); bi = i; bj = j; }
+      });
+      edges.push([bi, bj, false]); inTree.push(bj); depth[bj] = depth[bi] + 1;
+    }
+    for (var i2 = 0; i2 < n; i2++) {
+      var near = -1, nd = Infinity;
+      for (var j2 = 0; j2 < n; j2++) {
+        if (j2 === i2) continue;
+        var dup = edges.some(function (e) { return (e[0] === i2 && e[1] === j2) || (e[0] === j2 && e[1] === i2); });
+        if (!dup && dist(i2, j2) < nd) { nd = dist(i2, j2); near = j2; }
+      }
+      if (near > -1 && r() < 0.5) edges.push([Math.min(i2, near), Math.max(i2, near), true]);
+    }
+
+    var svg = el("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, "class": "connect__svg", focusable: "false", "aria-hidden": "true" });
+    box.insertBefore(svg, box.firstChild);
+
+    // faint ambient growth across the whole page
+    var amb = grow({
+      seed: "ambient" + Math.round(w / 50),
+      origins: [[-10, h * 0.85, -0.35], [w * 0.5, h + 10, -1.5], [w + 10, h * 0.3, Math.PI + 0.3], [w * 0.2, -10, 1.2]],
+      step: 11, steps: 120, wander: 0.45, branch: 0.06, maxTips: small ? 30 : 60, maxDepth: 3, maxLen: 70,
+      inside: function (x, y) { return x > -20 && y > -20 && x < w + 20 && y < h + 20; }
+    });
+    var ambG = el("g", { "class": "connect__ambient" });
+    svg.appendChild(ambG);
+    drawHyphae(ambG, amb, { width: 1.3, minWidth: 0.5, animate: animate, stepMs: 30, tipEvery: 5, tipR: 1.3 });
+
+    // the links between worlds, with short side branches
+    var speed = 0.45;                                  // px per ms while growing
+    var reached = {}; reached[hubIndex] = 0;
+    var edgeG = el("g", { "class": "connect__edges" }), sideG = el("g", { "class": "connect__sides" });
+    svg.appendChild(sideG); svg.appendChild(edgeG);
+    // grow tree edges in order of depth so each starts where the last arrived
+    var sorted = edges.slice().sort(function (a, b) { return (a[2] - b[2]) || (depth[a[0]] - depth[b[0]]); });
+    var finish = 0, paths = [];
+    sorted.forEach(function (e, k) {
+      var from = e[0], to = e[1];
+      if (!e[2] && depth[to] < depth[from]) { var t = from; from = to; to = t; }
+      var pts = seekPath(r, pos[from], pos[to], small ? 7 : 9);
+      var L = pathLen(pts);
+      var start = e[2] ? Math.max(reached[from] || 0, reached[to] || 0) + 200 : (reached[from] || 0);
+      var dur = L / speed;
+      if (!e[2]) reached[to] = start + dur;
+      finish = Math.max(finish, start + dur);
+      var id = "em-link-" + k;
+      var p = el("path", { d: pathD(pts), id: id, pathLength: "1", "class": "link" + (e[2] ? " link--extra" : ""), "data-a": from, "data-b": to });
+      if (animate) p.style.animation = "em-grow " + dur.toFixed(0) + "ms ease-in-out " + start.toFixed(0) + "ms both";
+      edgeG.appendChild(p);
+      paths.push({ el: p, id: id, len: L, a: from, b: to, start: start + dur });
+      // side branches sprouting off the link
+      var origins = [];
+      for (var s = 6; s < pts.length - 6; s += 9 + Math.floor(r() * 8)) {
+        var q0 = pts[s - 1], q1 = pts[s];
+        var dir = Math.atan2(q1[1] - q0[1], q1[0] - q0[0]) + (r() < 0.5 ? -1 : 1) * (0.5 + r() * 0.5);
+        origins.push([q1[0], q1[1], dir]);
+      }
+      if (origins.length) {
+        var side = grow({ seed: id, origins: origins, step: 6, steps: 18, wander: 0.5, branch: 0.1, maxTips: origins.length * 3, maxDepth: 2, maxLen: 14,
+          inside: function (x, y) { return x > 0 && y > 0 && x < w && y < h; } });
+        side.forEach(function (sp) { sp.born = 0; });
+        var sg = el("g", {});
+        drawHyphae(sg, side, { width: 1, minWidth: 0.5, animate: false, tipEvery: 2, tipR: 1.2 });
+        if (animate) sg.style.animation = "em-fade 1200ms ease-out " + (start + dur * 0.6).toFixed(0) + "ms both";
+        sideG.appendChild(sg);
+      }
+    });
+
+    // worlds: a planet with an orbit and a small colony inside
+    var worldG = el("g", { "class": "connect__worlds-art" });
+    svg.appendChild(worldG);
+    links.forEach(function (a, i) {
+      var hub = a.classList.contains("world--hub");
+      var R = (hub ? 34 : 24) * (small ? 0.82 : 1);
+      var x = pos[i][0], y = pos[i][1];
+      var wr = rng(a.getAttribute("data-seed") + "#world");
+      var g = el("g", { "class": "w" + (hub ? " w--hub" : ""), "data-i": i });
+      var tilt = (wr() - 0.5) * 50;
+      g.appendChild(el("ellipse", { cx: x, cy: y, rx: (R * 1.75).toFixed(1), ry: (R * 0.42).toFixed(1), transform: "rotate(" + tilt.toFixed(1) + " " + x.toFixed(1) + " " + y.toFixed(1) + ")", "class": "w__orbit" }));
+      g.appendChild(el("circle", { cx: x, cy: y, r: R, "class": "w__body" }));
+      var k = 3 + Math.floor(wr() * 3), turn = wr() * 6.28, org = [];
+      for (var q = 0; q < k; q++) org.push([x, y, turn + q / k * 6.28]);
+      var col = grow({ seed: a.getAttribute("data-seed"), origins: org, step: R / 9, steps: 30, wander: 0.6, branch: 0.14, maxTips: 30, maxDepth: 3, maxLen: 12,
+        steer: function (px, py, an) { var o = Math.atan2(py - y, px - x); return Math.atan2(Math.sin(o - an), Math.cos(o - an)) * 0.08; },
+        inside: function (px, py) { return Math.hypot(px - x, py - y) < R - 3; } });
+      var cg = el("g", { "class": "w__colony" });
+      drawHyphae(cg, col, { width: hub ? 1.6 : 1.3, minWidth: 0.5, animate: false, tipEvery: 3, tipR: 1.1 });
+      g.appendChild(cg);
+      g.appendChild(el("circle", { cx: x, cy: y, r: hub ? 4 : 2.6, "class": "w__core" }));
+      if (animate) g.style.animation = "em-pop 800ms cubic-bezier(.2,.8,.3,1.2) " + Math.max(0, (reached[i] || 0) - 380).toFixed(0) + "ms both";
+      worldG.appendChild(g);
+
+      a.style.left = x + "px";
+      a.style.top = y + "px";
+      a.style.setProperty("--r", R + "px");
+      if (animate) a.style.animation = "em-fade 700ms ease-out " + ((reached[i] || 0) + 100).toFixed(0) + "ms both";
+      else a.style.animation = "none";
+    });
+
+    // signals travelling along the links once everything has grown
+    if (!reduceMotion) {
+      var pg = el("g", { "class": "connect__pulses" });
+      svg.appendChild(pg);
+      paths.forEach(function (p, k) {
+        var dur = Math.max(3.5, p.len / 55);
+        var begin = ((animate ? finish : 0) / 1000 + r() * dur).toFixed(2) + "s";
+        var back = r() < 0.5;
+        var dot = el("circle", { r: small ? 2.2 : 2.6, "class": "pulse", opacity: "0" });
+        var mo = el("animateMotion", { dur: dur.toFixed(2) + "s", repeatCount: "indefinite", begin: begin, keyPoints: back ? "1;0" : "0;1", keyTimes: "0;1", calcMode: "linear" });
+        var mp = el("mpath", { href: "#" + p.id });
+        mp.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#" + p.id);
+        mo.appendChild(mp);
+        var fade = el("animate", { attributeName: "opacity", values: "0;1;1;0", keyTimes: "0;0.12;0.85;1", dur: dur.toFixed(2) + "s", repeatCount: "indefinite", begin: begin });
+        dot.appendChild(mo); dot.appendChild(fade);
+        pg.appendChild(dot);
+      });
+    }
+
+    // pointing at a world lights up its links
+    var light = function (i, on) {
+      Array.prototype.forEach.call(edgeG.querySelectorAll(".link"), function (p) {
+        if (+p.getAttribute("data-a") === i || +p.getAttribute("data-b") === i) p.classList.toggle("is-lit", on);
+      });
+      var wg = worldG.querySelector('.w[data-i="' + i + '"]');
+      if (wg) wg.classList.toggle("is-lit", on);
+    };
+    links.forEach(function (a, i) {
+      if (a._emBound) { a._emLight = light; return; }
+      a._emBound = true; a._emLight = light;
+      var on = function () { a._emLight(i, true); }, off = function () { a._emLight(i, false); };
+      a.addEventListener("mouseenter", on); a.addEventListener("mouseleave", off);
+      a.addEventListener("focus", on); a.addEventListener("blur", off);
+    });
+    box.classList.add("connect--live");
+  }
+
   /* ---------- sidenotes ---------- */
   function sidenotes() {
     var refs = document.querySelectorAll(".sheet__body sup[id^='fnref'], .sheet__body sup[role='doc-noteref']");
@@ -565,6 +787,18 @@
     sidenotes();
     marginalia();
     copyLinks();
+    var net = document.querySelector(".connect");
+    if (net) {
+      net.classList.add("connect--live");          // lay out first, so text positions are final
+      connect(net, !reduceMotion);
+      var netW = net.clientWidth, netT;
+      window.addEventListener("resize", function () {
+        clearTimeout(netT);
+        netT = setTimeout(function () {
+          if (Math.abs(net.clientWidth - netW) > 40) { netW = net.clientWidth; connect(net, false); }
+        }, 200);
+      });
+    }
     var sc = document.querySelector(".scene");
     if (sc) {
       scene(sc, !reduceMotion);

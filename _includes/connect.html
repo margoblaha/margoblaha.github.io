@@ -1,0 +1,12 @@
+{%- comment -%}
+  The contact network: each world is a link. Without JavaScript this is a
+  plain list; with it, the links become worlds joined by hyphae.
+{%- endcomment -%}
+<nav class="connect" aria-label="Find me elsewhere">
+  <p class="connect__title">Find me elsewhere</p>
+  <ul class="connect__worlds">
+    {%- for w in include.worlds %}
+    <li><a class="world{% if w.hub %} world--hub{% endif %}" href="{{ w.url }}"{% unless w.url contains 'mailto:' %} rel="noopener noreferrer"{% endunless %} data-seed="{{ w.label | escape }}"><span class="world__label">{{ w.label }}</span></a></li>
+    {%- endfor %}
+  </ul>
+</nav>

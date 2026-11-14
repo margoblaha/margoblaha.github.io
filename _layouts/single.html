@@ -4,7 +4,8 @@ layout: default
 {%- assign locale = page.locale | default: layout.locale | default: site.locale -%}
 {%- assign is_post = false -%}{%- if page.collection == "posts" -%}{%- assign is_post = true -%}{%- endif -%}
 
-<div id="main" role="main" class="sheet{% if is_post %} sheet--post{% else %} sheet--page{% endif %}{% if page.scene %} sheet--scene{% endif %}">
+<div id="main" role="main" class="sheet{% if is_post %} sheet--post{% else %} sheet--page{% endif %}{% if page.scene %} sheet--scene{% endif %}{% if page.connect %} sheet--connect{% endif %}">
+  {% if page.connect %}{% include connect.html worlds=page.connect %}{% endif %}
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | replace: '|', '&#124;' | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}

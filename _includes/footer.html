@@ -16,9 +16,6 @@
         <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer{% if link.rel %} {{ link.rel }}{% endif %}">{{ link.label | escape_once | strip }}</a></li>
         {% endif %}
       {% endfor %}
-      {% unless site.atom_feed.hide %}
-        <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}">RSS feed</a></li>
-      {% endunless %}
     </ul>
   </nav>
 

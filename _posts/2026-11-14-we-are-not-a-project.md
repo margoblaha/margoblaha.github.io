@@ -1,0 +1,113 @@
+---
+title: "We are not a project"
+excerpt: "On the pile of shoulds, the business of feeling not-yet-enough, and why the people who love us were never waiting for us to be finished."
+date: 2026-11-14
+layout: single
+read_time: true
+share: true
+comments: false
+categories:
+  - reflections
+tags:
+  - self-improvement
+  - social media
+  - perfectionism
+  - relationships
+---
+The alarm goes off at 5:58, because six felt lazy. Two glasses of water, because you should hydrate. The notebook with the to-do list, because you should plan your day, and the list has sub-lists. You should work out, ideally before work, ideally weights and not just cardio, because of bone density, because of later. You should do your best at work, and also not overwork, and also be visible, and also answer the email from Tuesday. You should see your friends, so you open the group chat to find an evening, and the evening becomes a calendar negotiation, and the negotiation becomes a small project with a deadline. You want time with your partner, which is lovely, so you should plan something: not the sofa again, something *intentional*. You should call your mum. Before she calls you, ideally, and be patient this time, and not sigh. Therapy is at 6 p.m., where you should work on that pattern, the one you noticed last month and now notice everywhere. And you should be better at managing your emotions, including the one you are having right now about how many things you should do.
+
+Taken one at a time, none of these is a villain. Moving your body is good. Friends are good. Mums, mostly, are good to call. The trouble is the pile, and the tone of the pile. Each wish shows up as a task which carries a small grade. Underneath runs a promise that if you get all of this right you might finally be *enough*. Fix the mornings, the body, the friendships, the attachment style, the inner child, and somewhere at the bottom of this long list there is a version of you who is finally perfect and can rest and be loved.
+
+It is true that we inevitably, and luckily, change as life goes on, and our small habits do matter. But the smuggled story here is that you, as you are this morning, with the unwashed mug from the herbal tea from last evening and the half-crossed-out list, are an imperfect, unfinished, draft.
+
+## Self-improvement in public
+
+Social media did not invent by itself this story. Self-improvement used to happen mostly in private before. It was in our diaries and our changing rooms, just now it happens in public, in numbered days and before-and-after slides, with perfect meals and daily routines that should keep us young forever.
+
+Have you ever wondered what this does to us? Well, as with most questions, it really depends. When researchers pooled experiments that showed people better-off others on social media, participants on average came away feeling worse about their bodies and themselves, not inspired[^mccomb]. A 2026 meta-analysis covering more than 36,000 people found that habitually comparing upward online goes together with anxiety, low mood and lower self-esteem[^frontiers]. Meanwhile, perfectionism among students in the US, UK and Canada has been climbing since at least 1989, and the fastest-growing kind is *socially prescribed* perfectionism: the sense that other people demand flawlessness from you. It began accelerating in the early 2000s[^curran]. The researchers tie it to economic pressure and inequality rather than to our phones, which is a useful corrective. But listen to what those pressures sound like from the inside. Grades that seem to decide your whole future. Jobs that may not exist by the time you qualify. Rent that eats half a salary. Parents who worry, out loud, about whether you will make it. Underneath all of it runs one message: you are *not yet* enough. Not yet qualified, not yet secure, not yet safe to stop. Hand that message a device that turns every life into a display, and it no longer needs to whisper. It can show you, every few seconds, someone who seems to have already arrived.
+
+## Connection, and who profits from it
+
+And yet the same feeds that sell the 5 a.m. routine also host the group chat for new parents awake at 3 a.m., the forum where someone with a rare diagnosis finally finds the twelve people who understand, the stranger's post that makes you feel less alone. Large studies of adolescents have found the overall link between digital technology use and wellbeing to be negative but small[^orben]. That connection is real, and worth defending.
+
+But it would be naive to call the platforms neutral. They are businesses that sell our attention to advertisers, and they are designed to keep us scrolling. Content that stirs us up holds attention better than contentment does: one analysis of millions of Facebook and Twitter posts found that posts about political opponents were shared about twice as often as posts about one's own side[^rathje]. Envy, outrage and the faint sting of someone else's perfect Sunday keep us on the page; feeling fine sends us off to make dinner. We are not the customers here. We are the product, and the people who profit from our sense of not-yet-enough are not the people feeling it. So the tool can connect us while the business model behind it feeds on our insecurity. What the feed changes is the shape of the promise. Improvement becomes visible, measurable and endless, because there is always another post, and someone gets paid every time we look.
+
+## When "I'd like to" becomes "I should"
+
+None of this makes growth a con. Most of us can point to some change we are grateful for: learning to ask for help before the deadline instead of after it, to say "I don't know" in a room full of clever people, to leave something that was making us smaller. Some self-improvement is less like renovation than like unclenching. The therapy that lets someone stop apologizing for taking up space. Or something as small as switching off your notifications for an evening.
+
+Our phones made us permanently reachable, and permanent reachability quietly erased the line between being available and being on call. For people pleasers that line was faint to begin with. Saying *not now* feels like a small betrayal, so they say yes, and yes, and yes, and call it kindness. But a lot of people pleasing is conflict avoidance in a nicer coat. The no that never gets said does not disappear. It turns into resentment, and resentment is bad for the person carrying it and for the relationship it was supposed to protect. Being unreachable for a few hours is not selfish. It is part of staying someone worth reaching.
+
+So the trouble is not improvement. The trouble begins when improvement changes its grammar. "I'd like to" becomes "I should," and "I should" quietly becomes "I'm not acceptable until." At that point growth is no longer something you do. It is something you owe: a moral duty, an identity, a membership fee. And because the fee is never posted anywhere, you never find out whether it has been paid.
+
+I know the pile from the inside. I'm training for a 5 km race, and the plan said *run today*. But last night I went out for drinks, because friends are also on the list, and this morning I woke up tired and didn't run. Now I'm on the sofa trying to let myself rest, and the word my brain keeps handing me is *lazy*. That is the trap in miniature: two good things, friendship and training, bumped into each other, and the verdict was that I had failed. The "better version of yourself" is a cruel target because it moves exactly as fast as you do. There is always another habit, another lesson, another layer of healed. So here is what I'm slowly trying to believe: it is okay to be lazy sometimes. A rest day is not a missed deadline.
+
+## We are not projects
+
+Here is the reversal I keep coming back to. We are not projects. A project is defined by its deliverable, and its value lives in the finished state. A person's value does not wait at the end of the Gantt chart. Love that arrives only once the optimization is complete is not love for you. It is approval of the output.
+
+This is where self-compassion earns its place, and not as a scented candle. Psychologists describe it as meeting your own failures with kindness instead of judgment, remembering that failing is what humans do, and noticing pain without either denying it or drowning in it[^neff]. In surveys of adolescents and adults, self-compassion weakened the link between perfectionism and depression[^ferrari]. And it does not, as we fear, kill motivation. In experiments, people prompted to be self-compassionate about a failure studied longer for a retest and felt more motivated to make amends for a wrong[^breines]. The kindness was not the reward for growth. It was the soil.
+
+## We don't become ourselves alone
+
+We also don't become ourselves alone: the self-help shelf may be stocked for a solo repair job (your mindset, your habits, your boundaries), as if a person were a bicycle you could fix in the garage, but people grow and change in relationship with others. Attachment theory describes a "secure base": someone to return to, whose reliability is what makes venturing out possible. Its adult version has been called the *dependency paradox*: in studies of couples, people whose partners accepted their need for support grew more independent over time, not less[^feeney]. Leaning on someone, it turns out, is often how we learn to stand.
+
+The stakes are not only emotional. Across 148 studies and more than 300,000 people, those with stronger social ties had about 50 percent higher odds of survival over the study periods, an effect comparable to familiar risk factors like smoking[^holt]. Quality matters, though: across 126 studies, better marriages were modestly but consistently linked to better health[^robles]. What counts is the relationship, not the relationship status.
+
+The best relationships do something no habit tracker can. They let us be known, which is different from being impressive. To be chosen on a day when you have nothing to show for yourself (no streak, no glow, nothing fit for the feed) is a quiet and specific kind of repair.
+
+## Rupture and repair
+
+But I want to be careful here, because optimization culture is very good at swallowing its critics. "Find a secure partner" slides easily onto the to-do list. Love does not cure on contact. It does not dissolve trauma, replace therapy, or excuse us from noticing what we do to other people. And a relationship turned into a project, audited for red flags, measured against an ideal attachment style, endlessly "worked on," becomes one more place where nobody is allowed to rest.
+
+Here is the hard part. If you love people, you will hurt them. Not because you are cruel, but because you work differently, and you are both people with feelings, and neither of you can see all the way inside the other. You need to talk it through tonight; they need to sleep on it. You show love by doing things; they just wanted you to sit down and listen. You were joking; they were tired. You forgot the appointment that mattered. You said the true thing at the wrong moment, or the wrong thing because your own day had been long. You pulled away when they reached for you, or reached for them when they needed room. And they will hurt you too, in the same ordinary ways. Someone will say, carefully, that it hurt, and the other will feel the hot urge to explain why it shouldn't have.
+
+It's okay.
+
+You are both imperfect, both feeling things, both doing this without a manual. Nobody was ever going to get it right every time, and nobody needed to.
+
+The optimization mindset reads all of this as failure, proof that the work is unfinished. Developmental science offers something gentler and more demanding. Filming mothers and babies at play, psychologists found that even healthy pairs spent most of their time slightly out of sync[^tronick]. What mattered was the repair: the glance that comes back, the mismatch that gets noticed and mended. Closeness is not the absence of rupture. It is the habit of returning.
+
+That is what a real apology is. Not a polished statement, not a caption, just: *I'm sorry. You're right. I didn't see it. I'm still here.* It costs something, because it means standing inside your own imperfection while someone you love looks straight at it.
+
+The reverse is true as well. Letting someone love you means handing them the power to hurt you. Vulnerability is not a design flaw in intimacy that some later version of you could patch. It is the condition of intimacy. The only person who cannot be hurt is the one no one can reach.
+
+## Sorry about the mess
+
+So perhaps the goal was never to be finished. Not invulnerable, not fully optimized, not impossible to disappoint. Something humbler and harder: more honest, more capable of repair, more willing to stay human with other humans.
+
+Most of us have a sentence we say at the door when friends come over: *sorry about the mess.* We say it whether or not there is a mess, as if the place should have been ready and we failed to finish it in time. And the friends who matter always do the same thing. They step over the shoes and sit down. They didn't come for an inspection. They came to talk, to drink tea, to sit with you for a while.
+
+Then one of them picks something up off the couch. A comic you drew this afternoon, still lying there next to a pen without its cap, half-buried in blankets you pulled over yourself because you were a little cold and wanted to be cozy while you drew. *What on earth is this?* they ask, already smiling. And you realize the mess was never standing between them and you. It was you, too: the tangled blankets, the uncapped pen, the small, silly, useless thing you made just because you wanted to.
+
+We spend so long getting ready for company. But the people who love us were never waiting for the house to be finished. They came for the person living in it.
+
+## Sources
+
+- Breines, J. G. and Chen, S. (2012). Self-compassion increases self-improvement motivation. *Personality and Social Psychology Bulletin*. [pubmed.ncbi.nlm.nih.gov/22645164](https://pubmed.ncbi.nlm.nih.gov/22645164/)
+- Curran, T., Hill, A. P. and Pose, M. (2026). Perfectionism is accelerating over time. *Psychological Bulletin*, 152(3). [ray.yorksj.ac.uk/id/eprint/14158](https://ray.yorksj.ac.uk/id/eprint/14158/)
+- Feeney, B. C. (2007). The dependency paradox in close relationships. *Journal of Personality and Social Psychology*. [doi:10.1037/0022-3514.92.2.268](https://doi.org/10.1037/0022-3514.92.2.268)
+- Ferrari, M. et al. (2018). Self-compassion moderates the perfectionism–depression link in both adolescence and adulthood. *PLoS ONE*. [doi:10.1371/journal.pone.0192022](https://doi.org/10.1371/journal.pone.0192022)
+- Holt-Lunstad, J., Smith, T. B. and Layton, J. B. (2010). Social relationships and mortality risk: a meta-analytic review. *PLoS Medicine*. [doi:10.1371/journal.pmed.1000316](https://doi.org/10.1371/journal.pmed.1000316)
+- McComb, C. A., Vanman, E. J. and Tobin, S. J. (2023). A meta-analysis of the effects of social media exposure to upward comparison targets on self-evaluations and emotions. *Media Psychology*. [Summary](https://www.psypost.org/2023/03/upward-comparison-on-social-media-harms-body-image-self-esteem-and-psychological-well-being-74424)
+- Meta-analysis of online upward comparison and maladjustment, 54 samples, N = 36,583 (2026). *Frontiers in Psychology*. [frontiersin.org](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1825169/full)
+- Neff, K. D. (2003). Self-compassion: an alternative conceptualization of a healthy attitude toward oneself. *Self and Identity*, 2(2).
+- Orben, A. and Przybylski, A. K. (2019). The association between adolescent well-being and digital technology use. *Nature Human Behaviour*. [doi:10.1038/s41562-018-0506-1](https://doi.org/10.1038/s41562-018-0506-1)
+- Rathje, S., Van Bavel, J. J. and van der Linden, S. (2021). Out-group animosity drives engagement on social media. *PNAS*. [doi:10.1073/pnas.2024292118](https://doi.org/10.1073/pnas.2024292118)
+- Robles, T. F. et al. (2014). Marital quality and health: a meta-analytic review. *Psychological Bulletin*. [pubmed.ncbi.nlm.nih.gov/23527470](https://pubmed.ncbi.nlm.nih.gov/23527470/)
+- Tronick, E. Z. and Cohn, J. F. (1989). Infant–mother face-to-face interaction: age and gender differences in coordination and the occurrence of miscoordination. *Child Development*. As reported in [this review](https://pmc.ncbi.nlm.nih.gov/articles/PMC4694580)
+
+## Citation notes
+
+[^mccomb]: McComb, Vanman and Tobin 2023.
+[^frontiers]: Frontiers in Psychology 2026.
+[^curran]: Curran, Hill and Pose 2026.
+[^orben]: Orben and Przybylski 2019.
+[^rathje]: Rathje, Van Bavel and van der Linden 2021.
+[^neff]: Neff 2003.
+[^ferrari]: Ferrari et al. 2018.
+[^breines]: Breines and Chen 2012.
+[^feeney]: Feeney 2007.
+[^holt]: Holt-Lunstad, Smith and Layton 2010.
+[^robles]: Robles et al. 2014.
+[^tronick]: Tronick and Cohn 1989.

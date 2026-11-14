@@ -4,6 +4,4 @@ permalink: /reflections/
 layout: single
 ---
 
-{% for post in site.categories.reflections %}
-- [{{ post.title }}]({{ post.url | relative_url }}) · {{ post.date | date: "%-d %B %Y" }}
-{% endfor %}
+{% include post-index.html posts=site.categories.reflections empty="No reflections published yet." %}

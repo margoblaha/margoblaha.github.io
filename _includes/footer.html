@@ -1,30 +1,26 @@
 {% assign locale = include.locale | default: site.locale %}
-{% unless site.atom_feed.hide %}
-  {% assign show_atom = true %}
-{% endunless %}
+<div class="colophon">
+  <div class="colophon__mark">
+    <a class="colophon__name" href="{{ '/' | relative_url }}">
+      <span>Epistemic</span>
+      <span class="colophon__name-margin">Margins</span>
+    </a>
+    <p class="colophon__line">Essays &amp; intellectual detours. Made with <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> and a questionable number of open tabs.</p>
+  </div>
 
-{% if site.footer.links or show_atom %}
-<div class="page__footer-follow">
-  <ul class="social-icons">
-    {% if site.data.ui-text[locale].follow_label %}
-      <li><strong>Elsewhere on the internet:</strong></li>
-    {% endif %}
-
-    {% if site.footer.links %}
+  <nav class="colophon__elsewhere" aria-label="Elsewhere">
+    <p class="colophon__label">Elsewhere on the internet</p>
+    <ul>
       {% for link in site.footer.links %}
         {% if link.label and link.url %}
-          <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer{% if link.rel %} {{ link.rel }}{% endif %}"><i class="{{ link.icon | default: 'fas fa-link' }}" aria-hidden="true"></i> {{ link.label | escape_once | strip }}</a></li>
+        <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer{% if link.rel %} {{ link.rel }}{% endif %}">{{ link.label | escape_once | strip }}</a></li>
         {% endif %}
       {% endfor %}
-    {% endif %}
-  </ul>
-</div>
-{% endif %}
+      {% unless site.atom_feed.hide %}
+        <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}">RSS feed</a></li>
+      {% endunless %}
+    </ul>
+  </nav>
 
-<div class="page__footer-copyright">
-  &copy; {% assign site_time = site.time | date: '%Y' %}{{ site_time }}
-  <a href="{{ site.copyright_url | default: site.url }}">Epistemic Margins</a>
-  &middot; Essays &amp; intellectual detours.
-  Made with <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a>
-  and a questionable number of open tabs.
+  <p class="colophon__copy">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
 </div>

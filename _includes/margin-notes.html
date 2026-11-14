@@ -1,0 +1,20 @@
+{%- comment -%}
+  Pencil notes that sit in the left margin beside a title.
+  usage: {% include margin-notes.html doc=post %}
+{%- endcomment -%}
+{%- assign doc = include.doc -%}
+{%- assign wpm = site.words_per_minute | default: 200 -%}
+{%- assign words = doc.content | strip_html | number_of_words -%}
+{%- assign minutes = words | divided_by: wpm -%}
+{%- if minutes < 1 -%}{%- assign minutes = 1 -%}{%- endif -%}
+<div class="margin-notes">
+  {%- if doc.date %}
+  <time class="margin-notes__date" datetime="{{ doc.date | date_to_xmlschema }}">{{ doc.date | date: "%-d %B %Y" }}</time>
+  {%- endif %}
+  {%- if doc.categories.size > 0 %}
+  <span class="margin-notes__kind">{{ doc.categories | first | downcase }}</span>
+  {%- endif %}
+  {%- if doc.date %}
+  <span class="margin-notes__time">{{ minutes }} min read</span>
+  {%- endif %}
+</div>

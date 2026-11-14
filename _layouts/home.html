@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{%- assign locale = page.locale | default: site.locale -%}
+{%- if paginator -%}{%- assign posts = paginator.posts -%}{%- else -%}{%- assign posts = site.posts -%}{%- endif -%}
+{%- assign first_page = true -%}
+{%- if paginator and paginator.page > 1 -%}{%- assign first_page = false -%}{%- endif -%}
+
+<div id="main" role="main" class="home">
+  {%- if first_page %}
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__net" data-seed="{{ site.title }}" aria-hidden="true">
+      {%- for topic in page.topics -%}<span class="hero__topic">{{ topic }}</span>{%- endfor -%}
+    </div>
+    <div class="hero__inner">
+      <h1 class="hero__title" id="hero-title">
+        <span class="hero__word">Epistemic</span>
+        <span class="hero__word hero__word--margin">Margins</span>
+      </h1>
+      <div class="hero__lede">
+        <p>{{ site.description }}</p>
+        <p class="hero__by">Essays, reflections and the odd poem by <a href="{{ '/about/' | relative_url }}">{{ site.author.name }}</a>.</p>
+      </div>
+    </div>
+  </section>
+  {%- endif %}
+
+  <section class="index" aria-labelledby="index-title">
+    <h2 class="index__title" id="index-title">{% if first_page %}Recent writing{% else %}Earlier writing{% endif %}</h2>
+    {% include post-index.html posts=posts feature=first_page %}
+    {% include paginator.html locale=locale %}
+  </section>
+
+  {{ content }}
+</div>

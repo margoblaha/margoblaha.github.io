@@ -1,0 +1,27 @@
+{%- comment -%}
+  A list of writing, each entry with its own culture plate.
+  usage: {% include post-index.html posts=site.categories.essays %}
+         add feature=true to give the first entry the large treatment
+         add empty="..." to change the message when nothing is published yet
+{%- endcomment -%}
+{%- assign entries = include.posts -%}
+<div class="entries">
+{%- for post in entries -%}
+  {%- assign lead = false -%}
+  {%- if include.feature and forloop.first -%}{%- assign lead = true -%}{%- endif -%}
+  <article class="entry{% if lead %} entry--lead{% endif %}">
+    {% include margin-notes.html doc=post %}
+    <div class="entry__main">
+      <h3 class="entry__title"><a href="{{ post.url | relative_url }}">{{ post.title | markdownify | remove: "<p>" | remove: "</p>" | strip }}</a></h3>
+      {%- if post.excerpt %}
+      <p class="entry__excerpt">{{ post.excerpt | markdownify | strip_html | strip }}</p>
+      {%- endif %}
+    </div>
+    <a class="entry__plate" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
+      <span class="plate" data-seed="{{ post.title | strip_html | escape }}"></span>
+    </a>
+  </article>
+{%- else -%}
+  <p class="entries__empty">{{ include.empty | default: "Nothing here yet. The first piece is on its way." }}</p>
+{%- endfor -%}
+</div>

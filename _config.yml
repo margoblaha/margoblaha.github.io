@@ -74,7 +74,7 @@ plugins:
 author:
   name: "Margo Blaha"                         # CHANGE
   # avatar: "/assets/images/bio-photo.jpg"        # uncomment after uploading a photo to assets/images/
-  bio: "Reaserching and writing about gender, culture, politics, philosophy, people & whatever intellectual rabbit hole I fell into this week."
+  bio: "Researching and writing about gender, culture, politics, philosophy, people & whatever intellectual rabbit hole I fell into this week."
   location: "Trento, Italy"
   links:
     - label: "Instagram"

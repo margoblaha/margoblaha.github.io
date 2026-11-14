@@ -5,6 +5,4 @@ layout: single
 ---
 
 
-{% for post in site.categories.opinions %}
-- [{{ post.title }}]({{ post.url | relative_url }}) · {{ post.date | date: "%-d %B %Y" }}
-{% endfor %}
+{% include post-index.html posts=site.categories.opinions empty="No opinions published yet. Give it time." %}

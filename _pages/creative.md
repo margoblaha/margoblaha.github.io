@@ -5,6 +5,4 @@ layout: single
 ---
 Could be my poetry.
 
-{% for post in site.categories.essays %}
-- [{{ post.title }}]({{ post.url | relative_url }}) · {{ post.date | date: "%-d %B %Y" }}
-{% endfor %}
+{% include post-index.html posts=site.categories.creative empty="Poems and prose will live here." %}

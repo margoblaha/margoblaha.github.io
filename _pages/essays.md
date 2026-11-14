@@ -5,6 +5,4 @@ layout: single
 ---
 Longer pieces on ideas I can't stop thinking about.
 
-{% for post in site.categories.essays %}
-- [{{ post.title }}]({{ post.url | relative_url }}) · {{ post.date | date: "%-d %B %Y" }}
-{% endfor %}
+{% include post-index.html posts=site.categories.essays %}

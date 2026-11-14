@@ -6,15 +6,19 @@
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 
-// ---- Palette: set after the skin, before the main import ----
+// ------------------------------------------------------------
+// Palette and type, handed to Minimal Mistakes before its partials.
+// Everything that makes the site look like Epistemic Margins
+// lives in /assets/css/margins.css (plain CSS, easier to edit).
+// ------------------------------------------------------------
 $background-color: #380C2E;          // deep plum
 $text-color: #FBF7F2;                // cream
-$muted-text-color: #965487;          // light plum,
-$primary-color: #B5523B;             // terracotta: buttons
-$link-color: #F0B49E;                // light terracotta, ~5.4:1 on plum
+$muted-text-color: #C9A6C2;          // pale mauve, 7.7:1 on plum
+$primary-color: #B5523B;             // terracotta
+$link-color: #F0B49E;                // light terracotta, 9.3:1 on plum
 $link-color-hover: #FBF7F2;
 $link-color-visited: #E3C3D6;
-$border-color: #8A4A78;
+$border-color: #6E3561;
 $code-background-color: #21051B;
 $code-background-color-dark: #1B171F;
 $form-background-color: #21051B;
@@ -23,123 +27,37 @@ $masthead-link-color: #FBF7F2;
 $masthead-link-color-hover: #F0B49E;
 $navicon-link-color-hover: #F0B49E;
 
+$serif: "Literata", Georgia, "Times New Roman", serif;
+$sans-serif: $serif;                  // no system sans anywhere
+$global-font-family: $serif;
+$header-font-family: "Fraunces", Georgia, serif;
+
 @import "minimal-mistakes"; // main partials
 
-// ---- Self-hosted fonts ----
-@font-face {
-  font-family: "Fraunces";
-  src: url("/assets/fonts/fraunces-600.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+// ------------------------------------------------------------
+// Self-hosted variable fonts (from Fontsource, OFL licence)
+// Fraunces: weight 100-900 plus optical size, SOFT and WONK axes
+// Literata: weight 200-900 plus optical size
+// ------------------------------------------------------------
+$latin: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD";
+$latin-ext: "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF";
+
+@mixin vfont($family, $file, $style, $weights, $range) {
+  @font-face {
+    font-family: $family;
+    src: url("/assets/fonts/#{$file}.woff2") format("woff2");
+    font-weight: $weights;
+    font-style: $style;
+    font-display: swap;
+    unicode-range: unquote($range);
+  }
 }
 
-@font-face {
-  font-family: "Fraunces";
-  src: url("/assets/fonts/fraunces-600-italic.woff2") format("woff2");
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Literata";
-  src: url("/assets/fonts/literata-400.woff2") format("woff2");
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Literata";
-  src: url("/assets/fonts/literata-400-italic.woff2") format("woff2");
-  font-weight: 400; font-style: italic; font-display: swap;
-}
-@font-face {
-  font-family: "Literata";
-  src: url("/assets/fonts/literata-700.woff2") format("woff2");
-  font-weight: 700; font-style: normal; font-display: swap;
-}
-
-body, button, input, textarea, .greedy-nav, .btn, .page__footer {
-  font-family: "Literata", Georgia, "Times New Roman", serif;
-}
-h1, h2, h3, h4, h5, h6, .page__title, .archive__item-title {
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 600;
-}
-
-.site-title {
-  font-family: "Fraunces", Georgia, serif;
-}
-
-// ---- Layout: roomy, ~65 characters per line ----
-body { line-height: 1.6; }
-.page__content { font-size: 1.1rem; }
-.page__content p, .page__content li { line-height: 1.6; }
-.page__content p, .page__content ul, .page__content ol, .page__content blockquote {
-  max-width: 34em;
-}
-
-// ---- Epistemic Margins masthead ----
-
-.masthead {
-  background: #380C2E;
-  border-bottom: none;
-}
-
-.masthead__inner-wrap {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.masthead .site-logo {
-  display: inline-block;
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0.75rem 1rem 0.75rem 0;
-  line-height: 1.05;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.logo-line-one,
-.logo-line-two {
-  display: block;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 1.55rem;
-}
-
-.logo-line-one {
-  color: #FBF7F2;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.logo-line-two {
-  margin-left: 2.1rem;
-  color: #B58AAF;
-  font-style: italic;
-  font-weight: 600;
-}
-
-.masthead .greedy-nav {
-  background: transparent;
-}
-
-.masthead .greedy-nav .visible-links a {
-  color: rgba(251, 247, 242, 0.82);
-}
-
-.masthead .greedy-nav .visible-links a:hover {
-  color: #FBF7F2;
-}
-
-.masthead .greedy-nav .hidden-links {
-  background: #380C2E;
-}
-
-.masthead .greedy-nav .hidden-links a {
-  color: #FBF7F2;
-}
-
-.page__content a { text-decoration: underline; text-underline-offset: 0.18em; }
-.page__content h2 { border-bottom: 2px solid #B5523B; padding-bottom: 0.2em; }
-::selection { background: #B5523B; color: #FBF7F2; }
+@include vfont("Fraunces", "fraunces-var", normal, 100 900, $latin);
+@include vfont("Fraunces", "fraunces-var-ext", normal, 100 900, $latin-ext);
+@include vfont("Fraunces", "fraunces-var-italic", italic, 100 900, $latin);
+@include vfont("Fraunces", "fraunces-var-ext-italic", italic, 100 900, $latin-ext);
+@include vfont("Literata", "literata-var", normal, 200 900, $latin);
+@include vfont("Literata", "literata-var-ext", normal, 200 900, $latin-ext);
+@include vfont("Literata", "literata-var-italic", italic, 200 900, $latin);
+@include vfont("Literata", "literata-var-ext-italic", italic, 200 900, $latin-ext);

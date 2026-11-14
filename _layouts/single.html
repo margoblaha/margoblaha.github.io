@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{%- assign locale = page.locale | default: layout.locale | default: site.locale -%}
+{%- assign is_post = false -%}{%- if page.collection == "posts" -%}{%- assign is_post = true -%}{%- endif -%}
+
+<div id="main" role="main" class="sheet{% if is_post %} sheet--post{% else %} sheet--page{% endif %}">
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>
+    {% if page.title %}<meta itemprop="headline" content="{{ page.title | replace: '|', '&#124;' | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
+    {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
+
+    <header class="sheet__head">
+      {% if is_post %}{% include margin-notes.html doc=page %}{% endif %}
+      <div class="sheet__titles">
+        {% if page.title -%}
+        <h1 id="page-title" class="sheet__title p-name" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" | strip }}</h1>
+        {%- endif %}
+        {% if is_post and page.excerpt -%}
+        <p class="sheet__deck">{{ page.excerpt | markdownify | strip_html | strip }}</p>
+        {%- endif %}
+      </div>
+      {% if is_post %}<span class="plate plate--large" data-seed="{{ page.title | strip_html | escape }}" aria-hidden="true"></span>{% endif %}
+    </header>
+
+    <section class="page__content e-content sheet__body" itemprop="text">
+      {{ content }}
+    </section>
+
+    {% if is_post %}
+    <footer class="sheet__foot">
+      <span class="plate plate--end" data-seed="{{ page.title | strip_html | escape }}" aria-hidden="true"></span>
+
+      {% if page.tags.size > 0 %}
+      <p class="sheet__tags"><span class="sheet__label">Filed under</span>
+        {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+      </p>
+      {% endif %}
+
+      {% if page.share %}
+      {%- assign share_url = page.url | absolute_url | url_encode -%}
+      {%- assign share_title = page.title | strip_html | url_encode -%}
+      <p class="sheet__share"><span class="sheet__label">Pass it on</span>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" rel="nofollow noopener noreferrer">LinkedIn</a>
+        <a href="https://bsky.app/intent/compose?text={{ share_title }}%20{{ share_url }}" rel="nofollow noopener noreferrer">Bluesky</a>
+        <a href="mailto:?subject={{ share_title }}&amp;body={{ share_url }}">Email</a>
+        <button type="button" class="copy-link" data-url="{{ page.url | absolute_url }}">Copy link</button>
+      </p>
+      {% endif %}
+
+      {% if page.previous or page.next %}
+      <nav class="sheet__more" aria-label="More writing">
+        {% if page.previous %}
+        <a class="sheet__more-link" href="{{ page.previous.url | relative_url }}">
+          <span class="sheet__label">Older</span>
+          <span class="sheet__more-title">{{ page.previous.title | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>
+        </a>
+        {% endif %}
+        {% if page.next %}
+        <a class="sheet__more-link sheet__more-link--next" href="{{ page.next.url | relative_url }}">
+          <span class="sheet__label">Newer</span>
+          <span class="sheet__more-title">{{ page.next.title | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>
+        </a>
+        {% endif %}
+      </nav>
+      {% endif %}
+    </footer>
+    {% endif %}
+  </article>
+</div>

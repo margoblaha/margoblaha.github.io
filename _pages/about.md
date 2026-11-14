@@ -3,6 +3,13 @@ title: "About"
 permalink: /about/
 layout: single
 author_profile: false
+# A landscape across the top of the page: sun, rain, mountains, forest,
+# and the mycelium connecting the trees underground. Remove to switch off.
+scene: true
+# One small drawing beside each "## heading", in order.
+# Choose from: mushroom, sun, rain, cloud, mountains, fern, tree, birds, mosquito
+# (or "none" to skip a heading).
+marginalia: [mushroom, sun, rain, mountains, birds]
 ---
 
 ## In brief

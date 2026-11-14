@@ -1,6 +1,6 @@
 ---
-title: "We are not a project"
-excerpt: "On the pile of shoulds, the business of feeling not-yet-enough, and why the people who love us were never waiting for us to be finished."
+title: "I am not a project"
+excerpt: "On being imperfect, hurting each other, and letting yourself be loved while being flawed."
 date: 2026-11-14
 layout: single
 read_time: true

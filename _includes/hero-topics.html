@@ -1,0 +1,30 @@
+{%- comment -%}
+  Words on the home-page network.
+  1. Tags from published writing, most used first (each links to /topics/).
+     Tags listed under topics_hide in _config.yml never appear.
+  2. If there are fewer than "topics_max", the gaps are filled from the
+     hand-written "topics" list in index.html, shown as open nodes:
+     themes still taking shape.
+{%- endcomment -%}
+{%- assign max = page.topics_max | default: 7 -%}
+{%- assign hidden = site.topics_hide | join: "|" | downcase | split: "|" -%}
+{%- capture counted -%}{%- for tag in site.tags -%}{%- assign key = tag[0] | downcase -%}{%- unless hidden contains key -%}{{ 9999 | minus: tag[1].size }}#{{ tag[0] }}|{%- endunless -%}{%- endfor -%}{%- endcapture -%}
+{%- assign ranked = counted | split: "|" | sort -%}
+{%- assign shown = "" | split: "" -%}
+<ul class="hero__topics" aria-label="Topics">
+{%- for entry in ranked limit: max -%}
+  {%- assign tag = entry | split: "#" | last -%}
+  {%- assign key = tag | downcase -%}
+  {%- assign shown = shown | push: key -%}
+  <li><a class="hero__topic hero__topic--live" href="{{ '/topics/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a></li>
+{%- endfor -%}
+{%- assign room = max | minus: shown.size -%}
+{%- for word in page.topics -%}
+  {%- if room <= 0 -%}{%- break -%}{%- endif -%}
+  {%- assign key = word | downcase -%}
+  {%- unless shown contains key -%}
+  <li><span class="hero__topic hero__topic--seed">{{ word }}</span></li>
+  {%- assign room = room | minus: 1 -%}
+  {%- endunless -%}
+{%- endfor -%}
+</ul>

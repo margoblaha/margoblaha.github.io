@@ -37,7 +37,7 @@ layout: default
 
       {% if page.tags.size > 0 %}
       <p class="sheet__tags"><span class="sheet__label">Filed under</span>
-        {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+        {% for tag in page.tags %}<a class="tag" href="{{ '/topics/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>{% endfor %}
       </p>
       {% endif %}
 

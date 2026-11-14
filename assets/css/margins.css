@@ -888,3 +888,90 @@ a:hover { color: var(--cream); }
   #main.sheet--connect { padding-bottom: 30rem; min-height: 0; }
   .sheet--connect .sheet__body { font-size: 1.12rem; }
 }
+
+/* ==========================================================================
+   Home: topics on the network
+   Filled nodes are tags from published writing (links to /topics/);
+   open nodes are themes still taking shape (from index.html).
+   ========================================================================== */
+.hero__topics { list-style: none; margin: 0; padding: 0; }
+.hero__topics li { margin: 0; }
+a.hero__topic { pointer-events: auto; color: var(--cream); text-decoration: none; }
+a.hero__topic:hover { color: var(--peach); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a.hero__topic:focus-visible { outline: 2px solid var(--peach); outline-offset: 4px; }
+.hero__topic--seed { color: var(--mauve-pale); }
+.node--seed { fill: var(--plum); stroke: var(--peach); stroke-width: 1.5; }
+.node-halo--seed { stroke-dasharray: 2 3; }
+.hero__inner { pointer-events: none; }
+.hero__inner a { pointer-events: auto; }
+
+@media (max-width: 44.99em) {
+  .hero__topics {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.1rem;
+    z-index: 2;
+  }
+  .hero__topic { position: static; transform: none; font-size: 0.98rem; }
+}
+
+/* tags under a post link to their topic */
+.sheet__tags a.tag { color: var(--cream); text-decoration: underline; text-decoration-color: rgba(240, 180, 158, 0.5); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.sheet__tags a.tag:hover { color: var(--peach); }
+
+/* ==========================================================================
+   Essays: the vine in the left margin. It grows as you read.
+   ========================================================================== */
+#main.sheet--post { position: relative; }
+.vine { position: absolute; z-index: 0; pointer-events: none; overflow: visible; }
+.vine__stem {
+  fill: none; stroke: #C79BBF; stroke-width: 2.6; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset 160ms linear;
+}
+.vine__twine {
+  fill: none; stroke: var(--mauve); stroke-opacity: 0.55; stroke-width: 1.1; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset 160ms linear;
+}
+.vine--grown .vine__stem, .vine--grown .vine__twine { stroke-dashoffset: 0; }
+
+.vine__part {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 600ms ease, transform 700ms cubic-bezier(.2, .8, .3, 1.2);
+}
+.vine__part:not(.vf) { transform: scale(0.3); }
+.vine__part.is-open { opacity: 1; }
+.vine__part.is-open:not(.vf) { transform: none; }
+/* flowers are placed with an SVG transform, so they unfold from an inner group */
+.vf__inner {
+  transform-box: fill-box; transform-origin: center;
+  transform: scale(0.2) rotate(-50deg);
+  transition: transform 1000ms cubic-bezier(.2, .8, .3, 1.15);
+}
+.vf.is-open .vf__inner { transform: none; }
+
+.vl__stalk { fill: none; stroke: #C79BBF; stroke-width: 1.2; stroke-linecap: round; }
+.vl__blade { fill: #4A1A41; stroke: var(--mauve-pale); stroke-width: 1; stroke-opacity: 0.85; stroke-linejoin: round; }
+.vl__blade--warm { fill: #5C2442; stroke: var(--peach); }
+.vl__vein { fill: none; stroke: var(--mauve-pale); stroke-opacity: 0.55; stroke-width: 0.8; stroke-linecap: round; }
+.vt__curl { fill: none; stroke: var(--mauve); stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+.vb__berry { fill: var(--clay); }
+.vf__petal { fill: var(--peach); fill-opacity: 0.94; stroke: var(--plum); stroke-width: 0.9; }
+.vf__petal--back { fill: var(--clay); fill-opacity: 0.85; }
+.vf__sepal { fill: #C79BBF; }
+.vf__stamen { fill: var(--cream); }
+.vu__bud { fill: var(--clay); stroke: var(--plum); stroke-width: 0.6; }
+.vf__heart { fill: var(--terracotta); }
+.vf--last .vf__heart { fill: var(--cream); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vine__stem, .vine__twine, .vine__part, .vf__inner { transition: none !important; }
+}
+@media print { .vine { display: none; } }

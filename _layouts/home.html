@@ -9,8 +9,8 @@ layout: default
 <div id="main" role="main" class="home">
   {%- if first_page %}
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero__net" data-seed="{{ site.title }}" aria-hidden="true">
-      {%- for topic in page.topics -%}<span class="hero__topic">{{ topic }}</span>{%- endfor -%}
+    <div class="hero__net" data-seed="{{ site.title }}">
+      {% include hero-topics.html %}
     </div>
     <div class="hero__inner">
       <h1 class="hero__title" id="hero-title">

@@ -7,6 +7,7 @@
  *    wide screens. The footnote list at the end stays for everyone else.
  * 3. Nature: a landscape cross-section and margin drawings (About page).
  * 4. Contact page: links as small worlds joined by hyphae.
+ *    Essays: a vine in the left margin that grows as you read.
  * 5. Copy link button on posts.
  */
 (function () {
@@ -119,7 +120,7 @@
     var old = box.querySelector("svg");
     if (old) old.remove();
     var small = w < 720;
-    var svg = el("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, "class": "hero__svg", focusable: "false" });
+    var svg = el("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, "class": "hero__svg", focusable: "false", "aria-hidden": "true" });
     box.insertBefore(svg, box.firstChild);
 
     var tips = grow({
@@ -146,56 +147,62 @@
 
     drawHyphae(svg, tips, { width: small ? 1.6 : 2.2, minWidth: 0.6, animate: animate, stepMs: 22, tipEvery: 3, tipR: 1.8 });
 
-    // topics sit on far-reaching branch ends, spread apart
+    // words sit on far-reaching branch ends. Each word's whole box must be
+    // clear of the title, the introduction and every word already placed.
     var labels = Array.prototype.slice.call(box.querySelectorAll(".hero__topic"));
     if (!labels.length) return;
-    // keep labels clear of the wordmark and the introduction
+    if (small) {                       // phones: the words become a plain list (see CSS)
+      labels.forEach(function (n) { n.style.left = ""; n.style.top = ""; n.style.animation = "none"; n.parentNode.hidden = false; });
+      return;
+    }
+    labels.forEach(function (n) { n.parentNode.hidden = false; n.style.left = "0px"; n.style.top = "0px"; });
+    var widths = labels.map(function (n) { return n.offsetWidth; });
+    var rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    var off = 1.1 * rem;               // the word starts this far right of its node
     var origin = box.getBoundingClientRect();
     var avoid = [];
     Array.prototype.forEach.call(document.querySelectorAll(".hero__word, .hero__lede p"), function (n) {
       var range = document.createRange();
       range.selectNodeContents(n);
       var b = range.getBoundingClientRect();
-      avoid.push([b.left - origin.left - 24, b.top - origin.top - 24, b.right - origin.left + 24, b.bottom - origin.top + 24]);
+      avoid.push([b.left - origin.left - 20, b.top - origin.top - 20, b.right - origin.left + 20, b.bottom - origin.top + 20]);
     });
-    var clear = function (x, y) {
-      var lab = [x - 14, y - 16, x + 200, y + 16];
-      return avoid.every(function (a) { return lab[2] < a[0] || lab[0] > a[2] || lab[3] < a[1] || lab[1] > a[3]; });
-    };
+    var hit = function (a, b) { return !(a[2] < b[0] || a[0] > b[2] || a[3] < b[1] || a[1] > b[3]); };
+    var tipOf = function (p) { return p.pts[p.pts.length - 1]; };
     var cands = tips.filter(function (p) {
-      var l = p.pts[p.pts.length - 1];
-      return p.depth <= 2 && p.pts.length > 8 && l[0] > w * 0.35 && l[0] < w - 190 && l[1] > h * 0.16 && l[1] < h * 0.8 && clear(l[0], l[1]);
+      var l = tipOf(p);
+      return p.depth <= 2 && p.pts.length > 8 && l[0] > w * 0.3 && l[1] > h * 0.12 && l[1] < h * 0.84;
     });
-    if (small) labels.forEach(function (n) { n.hidden = true; });
-    if (small || !cands.length) return;
-    var chosen = [cands[0]];
-    while (chosen.length < labels.length && chosen.length < cands.length) {
-      var best = null, bestD = -1;
-      cands.forEach(function (c) {
-        if (chosen.indexOf(c) > -1) return;
-        var cl = c.pts[c.pts.length - 1];
-        var dmin = Infinity;
-        chosen.forEach(function (s) {
-          var sl = s.pts[s.pts.length - 1];
-          var dx = cl[0] - sl[0], dy = (cl[1] - sl[1]) * 1.6;
-          dmin = Math.min(dmin, dx * dx + dy * dy);
-        });
-        if (dmin > bestD) { bestD = dmin; best = c; }
-      });
-      chosen.push(best);
-    }
+    var placed = [], rects = [];
     var ng = el("g", { "class": "nodes" });
     labels.forEach(function (n, i) {
-      var c = chosen[i];
-      if (!c) { n.hidden = true; return; }
-      var l = c.pts[c.pts.length - 1];
-      var dot = el("circle", { cx: l[0].toFixed(1), cy: l[1].toFixed(1), r: 4, "class": "node" });
-      var halo = el("circle", { cx: l[0].toFixed(1), cy: l[1].toFixed(1), r: 10, "class": "node-halo" });
-      n.hidden = false;
+      var best = null, bestS = -Infinity;
+      cands.forEach(function (c) {
+        if (placed.indexOf(c) > -1) return;
+        var l = tipOf(c);
+        var r = [l[0] - 14, l[1] - 20, l[0] + off + widths[i] + 14, l[1] + 20];
+        if (r[2] > w - 24) return;
+        if (avoid.some(function (a) { return hit(r, a); })) return;
+        if (rects.some(function (q) { return hit(r, q); })) return;
+        var score;
+        if (!placed.length) score = -Math.hypot(l[0] - w * 0.8, l[1] - h * 0.3);
+        else {
+          score = Infinity;
+          placed.forEach(function (q) { var m = tipOf(q); score = Math.min(score, Math.hypot(l[0] - m[0], (l[1] - m[1]) * 1.6)); });
+        }
+        if (score > bestS) { bestS = score; best = c; }
+      });
+      if (!best) { n.parentNode.hidden = true; return; }
+      var l = tipOf(best);
+      placed.push(best);
+      rects.push([l[0] - 14, l[1] - 20, l[0] + off + widths[i] + 14, l[1] + 20]);
+      var seed = n.classList.contains("hero__topic--seed");
+      var dot = el("circle", { cx: l[0].toFixed(1), cy: l[1].toFixed(1), r: seed ? 3.5 : 4, "class": "node" + (seed ? " node--seed" : "") });
+      var halo = el("circle", { cx: l[0].toFixed(1), cy: l[1].toFixed(1), r: 10, "class": "node-halo" + (seed ? " node-halo--seed" : "") });
       n.style.left = l[0] + "px";
       n.style.top = l[1] + "px";
       if (animate) {
-        var t = (c.doneAt || 0) + 120;
+        var t = (best.doneAt || 0) + 120;
         dot.style.animation = "em-pop 700ms ease-out " + t + "ms both";
         halo.style.animation = "em-pop 900ms ease-out " + t + "ms both";
         n.style.animation = "em-label 900ms ease-out " + (t + 150) + "ms both";
@@ -743,6 +750,197 @@
     box.classList.add("connect--live");
   }
 
+  /* ---------- essays: a vine down the left margin ----------
+   * It grows as you read: the stem reaches as far as you have scrolled,
+   * leaves unfurl as it passes them, a flower opens beside each section
+   * heading, and a larger one at the end of the essay.
+   */
+  function leafPath(L, W) {
+    // a pointed, slightly heart-based leaf from (0,0) to (L,0)
+    return "M0 0C" + (L * 0.1).toFixed(1) + " " + (-W * 1.05).toFixed(1) + " " + (L * 0.62).toFixed(1) + " " + (-W * 0.95).toFixed(1) + " " + L.toFixed(1) + " 0" +
+           "C" + (L * 0.62).toFixed(1) + " " + (W * 0.95).toFixed(1) + " " + (L * 0.1).toFixed(1) + " " + (W * 1.05).toFixed(1) + " 0 0Z";
+  }
+  function flowerG(x, y, R, cls, rr, double) {
+    var g = el("g", { "class": cls, transform: "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ")" });
+    var inner = el("g", { "class": "vf__inner" });
+    var turn = rr() * 72;
+    for (var s = 0; s < 5; s++) {                    // green sepals peeking between the petals
+      inner.appendChild(el("path", { d: "M0 0L" + (R * 0.95).toFixed(1) + " " + (-R * 0.12).toFixed(1) + "L" + (R * 1.05).toFixed(1) + " 0L" + (R * 0.95).toFixed(1) + " " + (R * 0.12).toFixed(1) + "Z",
+        transform: "rotate(" + (turn + 36 + s * 72).toFixed(1) + ")", "class": "vf__sepal" }));
+    }
+    if (double) {
+      for (var o = 0; o < 5; o++) {
+        inner.appendChild(el("ellipse", { cx: (R * 0.62).toFixed(1), cy: 0, rx: (R * 0.62).toFixed(1), ry: (R * 0.4).toFixed(1),
+          transform: "rotate(" + (turn + 36 + o * 72).toFixed(1) + ")", "class": "vf__petal vf__petal--back" }));
+      }
+    }
+    for (var k = 0; k < 5; k++) {
+      inner.appendChild(el("ellipse", { cx: (R * 0.55).toFixed(1), cy: 0, rx: (R * 0.55).toFixed(1), ry: (R * 0.36).toFixed(1),
+        transform: "rotate(" + (turn + k * 72).toFixed(1) + ")", "class": "vf__petal" }));
+    }
+    inner.appendChild(el("circle", { cx: 0, cy: 0, r: (R * 0.24).toFixed(1), "class": "vf__heart" }));
+    for (var d = 0; d < 6; d++) {                    // stamens
+      var a = d * 1.047 + turn;
+      inner.appendChild(el("circle", { cx: (Math.cos(a) * R * 0.34).toFixed(1), cy: (Math.sin(a) * R * 0.34).toFixed(1), r: (R * 0.06 + 0.4).toFixed(1), "class": "vf__stamen" }));
+    }
+    g.appendChild(inner);
+    return g;
+  }
+
+  var vineState = null;
+  function vine(sheet) {
+    var body = sheet.querySelector(".sheet__body");
+    if (!body) return;
+    var old = sheet.querySelector(".vine");
+    if (old) old.remove();
+    vineState = null;
+    var bodyMargin = parseFloat(getComputedStyle(body).marginLeft) || 0;
+    if (bodyMargin < 100) return;                     // no margin to grow in (phones, tablets)
+
+    var sr = sheet.getBoundingClientRect(), br = body.getBoundingClientRect();
+    var rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    var gutter = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--gutter")) * rem || 48;
+    var colW = bodyMargin - gutter;                   // the left margin column
+    var left = br.left - sr.left - bodyMargin;
+    var top = br.top - sr.top - 10;
+    var H = Math.round(br.height + 80);              // room at the end for the last bloom
+    var W = Math.round(colW);
+    var r = rng((sheet.querySelector(".sheet__title") || body).textContent + "#vine");
+
+    var svg = el("svg", { "class": "vine", viewBox: "0 0 " + W + " " + H, width: W, height: H, "aria-hidden": "true", focusable: "false" });
+    svg.style.left = left + "px";
+    svg.style.top = top + "px";
+
+    // the stem: two slow waves layered, kept inside the margin column
+    var cx = W * 0.5, A = W * 0.2, P1 = 300 + r() * 120, P2 = 110 + r() * 40, ph1 = r() * 6.28, ph2 = r() * 6.28;
+    var stemX = function (y) {
+      var ramp = Math.min(1, y / 160);                // starts calm under the title
+      return cx + ramp * (A * Math.sin(ph1 + y / P1 * 6.28) * 0.85 + A * 0.32 * Math.sin(ph2 + y / P2 * 6.28));
+    };
+    var pts = [];
+    for (var y = 0; y <= H; y += 8) pts.push([stemX(y), y]);
+    var stem = el("path", { d: pathD(pts), "class": "vine__stem", pathLength: "1" });
+    // a thinner shoot twining round the main stem
+    var twin = [], tw0 = 120, tw1 = H * 0.92;
+    for (var y2 = tw0; y2 <= tw1; y2 += 6) twin.push([stemX(y2) + 6.5 * Math.sin(y2 / 26 + 1.3), y2]);
+    var twine = el("path", { d: pathD(twin), "class": "vine__twine", pathLength: "1" });
+    svg.appendChild(twine);
+    svg.appendChild(stem);
+
+    var parts = [];                                   // things that appear as the stem passes them
+    var at = function (y) { return [stemX(y), y]; };
+    var dirAt = function (y) { var a = at(y - 4), b = at(y + 4); return Math.atan2(b[1] - a[1], b[0] - a[0]); };
+
+    // section headings get a flower beside them
+    var flowersAt = [];
+    Array.prototype.forEach.call(body.querySelectorAll(":scope > h2"), function (h) {
+      var hy = h.getBoundingClientRect().top - br.top + 10 + 16;
+      if (hy > 40 && hy < H - 60) flowersAt.push(hy);
+    });
+
+    // leaves, alternating sides, every 46–80px; tendrils now and then
+    var side = 1, ly = 46, n = 0;
+    while (ly < H - 70) {
+      var near = flowersAt.some(function (fy) { return Math.abs(fy - ly) < 26; });
+      if (!near) {
+        var p = at(ly), d = dirAt(ly);
+        var room = side > 0 ? W - 6 - p[0] : p[0] - 6;  // keep leaves inside the column
+        var L = Math.min(21 + r() * 15, Math.max(10, room * 0.78));
+        var Wd = L * (0.4 + r() * 0.12);
+        var ang = d + side * (0.75 + r() * 0.5);         // hang outward and down
+        var pet = 4 + r() * 4;
+        var bx = p[0] + Math.cos(ang) * pet, by = p[1] + Math.sin(ang) * pet;
+        var g = el("g", { "class": "vine__part vl", "data-y": ly.toFixed(0) });
+        g.appendChild(el("path", { d: "M" + p[0].toFixed(1) + " " + p[1].toFixed(1) + "L" + bx.toFixed(1) + " " + by.toFixed(1), "class": "vl__stalk" }));
+        var leaf = el("g", { transform: "translate(" + bx.toFixed(1) + " " + by.toFixed(1) + ") rotate(" + (ang * 57.2958).toFixed(1) + ")" });
+        leaf.appendChild(el("path", { d: leafPath(L, Wd), "class": "vl__blade" + (r() < 0.18 ? " vl__blade--warm" : "") }));
+        leaf.appendChild(el("path", { d: "M1 0L" + (L * 0.82).toFixed(1) + " 0", "class": "vl__vein" }));
+        g.appendChild(leaf);
+        parts.push({ y: ly, el: g });
+        // a curling tendril on the opposite side, every few leaves
+        if (n % 3 === 1) {
+          var ta = d - side * (0.9 + r() * 0.4), tl = 10 + r() * 8, tx = p[0] + Math.cos(ta) * tl, ty = p[1] + Math.sin(ta) * tl;
+          var tp = "M" + p[0].toFixed(1) + " " + p[1].toFixed(1) + "Q" + (p[0] + Math.cos(ta - side * 0.3) * tl * 0.6).toFixed(1) + " " + (p[1] + Math.sin(ta - side * 0.3) * tl * 0.6).toFixed(1) + " " + tx.toFixed(1) + " " + ty.toFixed(1);
+          var R0 = 5.5 + r() * 2.5, ccx = tx + Math.cos(ta + side * 1.5708) * R0, ccy = ty + Math.sin(ta + side * 1.5708) * R0;
+          var a0 = Math.atan2(ty - ccy, tx - ccx);
+          for (var k = 1; k <= 22; k++) {
+            var tt = k / 22, aa = a0 - side * tt * 9.4, rr = R0 * (1 - tt * 0.8);
+            if (Math.abs(ccx + Math.cos(aa) * rr - W / 2) > W / 2 - 2) break;
+            tp += "L" + (ccx + Math.cos(aa) * rr).toFixed(1) + " " + (ccy + Math.sin(aa) * rr).toFixed(1);
+          }
+          var tg = el("g", { "class": "vine__part vt", "data-y": (ly + 6).toFixed(0) });
+          tg.appendChild(el("path", { d: tp, "class": "vt__curl" }));
+          parts.push({ y: ly + 6, el: tg });
+        }
+        // a closed bud on a short stalk
+        if (r() < 0.1) {
+          var ua = d - side * 0.9, ux = p[0] + Math.cos(ua) * 11, uy = p[1] + Math.sin(ua) * 11;
+          var ug = el("g", { "class": "vine__part vu", "data-y": (ly + 8).toFixed(0) });
+          ug.appendChild(el("path", { d: "M" + p[0].toFixed(1) + " " + p[1].toFixed(1) + "L" + ux.toFixed(1) + " " + uy.toFixed(1), "class": "vl__stalk" }));
+          var bud = el("g", { transform: "translate(" + ux.toFixed(1) + " " + uy.toFixed(1) + ") rotate(" + (ua * 57.2958).toFixed(1) + ")" });
+          bud.appendChild(el("path", { d: "M0 0C2 -4.5 7 -4 9 0C7 4 2 4.5 0 0Z", "class": "vu__bud" }));
+          bud.appendChild(el("path", { d: "M0 0L4 -3M0 0L4 3", "class": "vl__stalk" }));
+          ug.appendChild(bud);
+          parts.push({ y: ly + 8, el: ug });
+        }
+        // a few berries
+        else if (r() < 0.12) {
+          var bg = el("g", { "class": "vine__part vb", "data-y": (ly + 10).toFixed(0) });
+          var ba = d - side * 1.1, bx0 = p[0] + Math.cos(ba) * 9, by0 = p[1] + Math.sin(ba) * 9 + 6;
+          bg.appendChild(el("path", { d: "M" + p[0].toFixed(1) + " " + p[1].toFixed(1) + "L" + bx0.toFixed(1) + " " + (by0 - 4).toFixed(1), "class": "vl__stalk" }));
+          [[0, 0], [4.2, 2.4], [-1, 4.6]].forEach(function (o) {
+            bg.appendChild(el("circle", { cx: (bx0 + o[0]).toFixed(1), cy: (by0 + o[1]).toFixed(1), r: 2.4, "class": "vb__berry" }));
+          });
+          parts.push({ y: ly + 10, el: bg });
+        }
+        side = -side; n++;
+      }
+      ly += 34 + r() * 30;
+    }
+
+    // flowers beside headings, and the last bloom at the end
+    flowersAt.forEach(function (fy) {
+      var p = at(fy);
+      var f = flowerG(p[0], p[1], 15 + r() * 3, "vine__part vf", r, false);
+      f.setAttribute("data-y", fy.toFixed(0));
+      parts.push({ y: fy, el: f });
+    });
+    var end = at(H - 48);
+    var last = flowerG(end[0], end[1], 26, "vine__part vf vf--last", r, true);
+    last.setAttribute("data-y", (H - 48).toFixed(0));
+    parts.push({ y: H - 48, el: last });
+
+    var partsG = el("g", { "class": "vine__parts" });
+    parts.sort(function (a, b) { return a.y - b.y; }).forEach(function (q) { partsG.appendChild(q.el); });
+    svg.appendChild(partsG);
+    sheet.appendChild(svg);
+
+    vineState = { svg: svg, stem: stem, twine: twine, parts: parts, H: H, tw0: tw0, tw1: tw1 };
+    if (reduceMotion) {
+      svg.classList.add("vine--grown");
+      parts.forEach(function (q) { q.el.classList.add("is-open"); });
+    } else {
+      growVine();
+    }
+  }
+
+  function growVine() {
+    var v = vineState;
+    if (!v || reduceMotion) return;                    // reduced motion: it stays fully grown
+    var rect = v.svg.getBoundingClientRect();
+    // the tip sits a little below the middle of the screen
+    var reach = Math.max(0, Math.min(v.H, window.innerHeight * 0.62 - rect.top));
+    var f = reach / v.H;
+    v.stem.style.strokeDashoffset = (1 - f).toFixed(4);
+    var tf = Math.max(0, Math.min(1, (reach - v.tw0) / (v.tw1 - v.tw0)));
+    v.twine.style.strokeDashoffset = (1 - tf).toFixed(4);
+    for (var i = 0; i < v.parts.length; i++) {
+      var q = v.parts[i];
+      var open = q.y <= reach;
+      if (open !== q.open) { q.open = open; q.el.classList.toggle("is-open", open); }
+    }
+  }
+
   /* ---------- sidenotes ---------- */
   function sidenotes() {
     var refs = document.querySelectorAll(".sheet__body sup[id^='fnref'], .sheet__body sup[role='doc-noteref']");
@@ -787,6 +985,23 @@
     sidenotes();
     marginalia();
     copyLinks();
+    var post = document.querySelector(".sheet--post");
+    if (post) {
+      var start = function () { vine(post); };
+      start();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+      window.addEventListener("load", start);
+      var vineW = window.innerWidth, vineT, ticking = false;
+      window.addEventListener("resize", function () {
+        clearTimeout(vineT);
+        vineT = setTimeout(function () { if (Math.abs(window.innerWidth - vineW) > 30) { vineW = window.innerWidth; start(); } }, 250);
+      });
+      window.addEventListener("scroll", function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { ticking = false; growVine(); });
+      }, { passive: true });
+    }
     var net = document.querySelector(".connect");
     if (net) {
       net.classList.add("connect--live");          // lay out first, so text positions are final

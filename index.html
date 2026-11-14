@@ -1,10 +1,16 @@
 ---
 # Home page. The layout lives in _layouts/home.html.
-# "topics" are the words that sit on the mycelium network at the top
-# of the home page. Keep them short; 5 to 7 works best.
+#
+# The words on the mycelium network at the top of the page update by
+# themselves: they are the tags on your posts, most used first, and each
+# one links to its section on the Topics page.
+# Until there are enough tags, the network is topped up with the words in
+# "topics" below, drawn as open nodes (themes still to be written about).
+# Tags that should never appear (like "introduction") are listed under
+# topics_hide in _config.yml.
 layout: home
+topics_max: 7          # how many words the network holds
 topics:
-  - gender
   - care
   - ecology
   - philosophy of science

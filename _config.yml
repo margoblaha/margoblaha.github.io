@@ -157,3 +157,7 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+
+# Tags left off the home-page network and the Topics page
+topics_hide:
+  - introduction

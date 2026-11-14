@@ -1,7 +1,7 @@
 ---
 title: "I am not a project"
 excerpt: "On being imperfect, hurting each other, and letting yourself be loved while being flawed."
-date: 2026-11-14
+date: 2026-11-15
 layout: single
 read_time: true
 share: true
@@ -24,7 +24,7 @@ It is true that we inevitably, and luckily, change as life goes on, and our smal
 
 Social media did not invent by itself this story, just self-improvement used to happen mostly in private before. It was in our diaries and in our changing rooms, and now it happens in public, in numbered days and before-and-after carousels, with perfect meals and daily routines that should keep us young forever.
 
-Have you ever wondered what this does to us? Well, as with most questions, it really depends. When researchers pooled experiments that showed people better-off others on social media, participants on average came away feeling worse about their bodies and themselves, not inspired[^mccomb]. A 2026 meta-analysis covering more than 36,000 people found that habitually comparing upward online goes together with anxiety, low mood and lower self-esteem[^frontiers]. Meanwhile, perfectionism among students in the US, UK and Canada has been climbing since at least 1989, and the fastest-growing kind is *socially prescribed* perfectionism, which is the sense that other people demand flawlessness from you. It began accelerating in the early 2000s[^curran]. The researchers tie it to economic pressure and inequality rather than to our phones, which is a useful corrective. It is good to notice what those pressures sound like from the inside before your life gets swallowed by them. Grades that seem to decide your whole future, jobs that may not exist by the time you qualify, rent that eats half a salary, parents who worry about whether you will make it. They all measure you by what you are not yet, never by what you already are. Not yet qualified, and not yet secure. Social media amplifies it by showing you, every few minutes, someone who seems to have already arrived.
+Have you ever wondered what this does to us? Well, as with most questions, it really depends. When researchers pooled experiments that showed people better-off others on social media, participants on average came away feeling worse about their bodies and themselves, not inspired[^mccomb]. A 2026 meta-analysis covering more than 36,000 people found that habitually comparing upward online goes together with anxiety, low mood and lower self-esteem[^frontiers]. Meanwhile, perfectionism among students in the US, UK and Canada has been climbing since at least 1989, and the fastest-growing kind is *socially prescribed* perfectionism, which is the sense that other people demand flawlessness from you. It began accelerating in the early 2000s[^curran]. The researchers tie it to economic pressure and inequality rather than to our phones, which is a useful corrective. It is good to notice what those pressures sound like from the inside before your life gets swallowed by them. Grades that seem to decide your whole future, jobs that may not exist by the time you qualify, rent that eats half a salary, parents who worry about whether you will make it. They all measure you by what you are not yet, never by what you already are, and social media amplifies this feeling of inadequacy and unfulfillment by showing you, every few minutes, someone who seems to have figured everything out.
 
 ## Connection, and who profits from it
 

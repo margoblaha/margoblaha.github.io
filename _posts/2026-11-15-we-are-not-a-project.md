@@ -72,7 +72,7 @@ The reverse is true as well. Letting someone love you means handing them the pow
 
 So perhaps the goal was never to be finished with our project; maybe just to be more honest and more willing to stay human with other humans. 
 
-Most of us have a sentence we say at the door when friends come over: *sorry about the mess.* We learnt it from other and we tend to say it whether or not there is a mess, as if the place should have been ready and we failed to finish it in time. Have you noticed that the friends who matter always do the same thing? They just step over the shoes, probably look inside your fridge, and sit down anywhere. They just came to talk, to drink tea, to eat your snacks and to be with you for a while.
+Most of us have a sentence we say at the door when friends come over: *sorry about the mess.* We learnt it from others, and we tend to say it whether or not there is a mess, as if the place should have been ready and we failed to tidy it up in time. But have you noticed that your actual friends always do the same thing? They just step over the shoes at your door, then probably look inside your fridge, and sit down anywhere. They just came to talk, to drink tea, to eat your snacks and to be with you for a while.
 
 Then they pick something up off the couch. A comic you drew this afternoon, still lying there next to a pen without its cap, half-buried in blankets you pulled over yourself because you were a little cold and wanted to be cozy while you drew. *What on earth is this??* they ask, and you realise the "mess" was, is, all you, too. Including all the tangled blankets, the uncapped pen, the small, silly, thing you drew just because you wanted to.
 

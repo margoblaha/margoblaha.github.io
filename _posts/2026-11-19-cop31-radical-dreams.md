@@ -10,10 +10,6 @@ tags:
   - idealism
 ---
 
-*COP31 and radical dreams.*
-
-## A stab
-
 It's the second week of COP31, I am reading an interview with Italy's minister for the environment and energy security. He gave it to the young reporters of Stampa Giovanile, the youth press agency I travelled with to Belém's COP30 last year. If the war in the Gulf drags on and gas climbs above €100, he told them, he may have to order Italy's coal plants back on. It would be, he said, "una coltellata"[^src1], a stab. To himself, I think, to the man who had proudly closed those plants. Isn't that a curious place to feel the blade when the people who would breathe the smoke are somewhere else?
  
 The day before, the summit's own draft text had asked the world for "accelerated action to phase out fossil fuels"[^src2]. And you may have wondered what is the point of a room where everyone agrees the house is on fire, and a good number of the guests sell matches?
